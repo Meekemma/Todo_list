@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+</head>
+<body>
+    <div id = 'container'>
+        <div id = 'formContainer'>
+            <form method="POST" action="/">
+                {% csrf_token %}
+                {{form.task}}
+                <button id = 'add' type = 'submit'>Add</button>
+            </form>
+        </div>
+
+        <div id = 'todoItems'>
+            {% for todo in todos %}
+                <div class="item">
+                    <p>{{todo}}</p>
+                    <div class="control">
+                        <a class="btn btn-sm btn-info" href="{% url 'update_item' todo.id %}"><button class = 'edit'>Edit</button></a>
+				        <a class="btn btn-sm btn-danger" href="{% url 'delete_Item' todo.id %}"><button class = 'delete'>Delete</button></a>
+	
+
+                    </div>
+                    
+                    
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
